@@ -8,8 +8,18 @@ function Button({ value, inputOperand, inputOperator, del, clear, zero }) {
     setOperandSatu,
     operandDua,
     setOperandDua,
-    setOperator,
-    operator,
+    operandTiga,
+    setOperandTiga,
+    operandEmpat,
+    setOperandEmpat,
+    operatorSatu,
+    setOperatorSatu,
+    operatorDua,
+    setOperatorDua,
+    operatorTiga,
+    setOperatorTiga,
+    setHasil,
+    setHasilDua,
   } = useContext(CalcContext);
   const checkProp = () => {
     switch (true) {
@@ -18,38 +28,140 @@ function Button({ value, inputOperand, inputOperator, del, clear, zero }) {
         // * Cek tombol nol
         if (zero) {
           if (Number(operandSatu) > 0) {
-            operator ? null : setOperandSatu((prev) => prev.concat(value));
+            operatorSatu ? null : setOperandSatu((prev) => prev.concat(value));
           }
           if (Number(operandDua) > 0) {
-            operator ? setOperandDua((prev) => prev.concat(value)) : null;
+            !operatorDua && !operatorTiga
+              ? setOperandDua((prev) => prev.concat(value))
+              : null;
+          }
+          if (Number(operandTiga) > 0) {
+            operatorDua && !operatorTiga
+              ? setOperandTiga((prev) => prev.concat(value))
+              : null;
+          }
+          if (Number(operandEmpat) > 0) {
+            operatorTiga ? setOperandEmpat((prev) => prev.concat(value)) : null;
           }
         } else {
-          operator
+          !operatorSatu && !operatorDua && !operatorTiga
+            ? setOperandSatu((prev) => prev.concat(value))
+            : null;
+          operatorSatu && !operatorDua && !operatorTiga
             ? setOperandDua((prev) => prev.concat(value))
-            : setOperandSatu((prev) => prev.concat(value));
+            : null;
+          operatorSatu && operatorDua && !operatorTiga
+            ? setOperandTiga((prev) => prev.concat(value))
+            : null;
+          operatorSatu && operatorDua && operatorTiga
+            ? setOperandEmpat((prev) => prev.concat(value))
+            : null;
         }
         break;
       // * Cek tombol operator
       case inputOperator:
-        if (operandSatu !== "" && operandDua === "") {
-          setOperator(value);
+        if (
+          operandSatu !== "" &&
+          operandDua === "" &&
+          operandTiga === "" &&
+          operandEmpat === ""
+        ) {
+          setOperatorSatu(value);
+        } else if (
+          operandSatu !== "" &&
+          operandDua !== "" &&
+          operandTiga === "" &&
+          operandEmpat === ""
+        ) {
+          setOperatorDua(value);
+        } else if (
+          operandSatu !== "" &&
+          operandDua !== "" &&
+          operandTiga !== "" &&
+          operandEmpat === ""
+        ) {
+          setOperatorTiga(value);
         }
         break;
       // * Cek tombol delete
       case del:
-        if (operandDua.length) {
+        if (operandEmpat) {
+          setOperandEmpat((prev) => prev.slice(0, -1));
+        } else if (
+          !operandEmpat &&
+          operatorTiga &&
+          operandTiga &&
+          operatorDua &&
+          operandDua &&
+          operatorSatu &&
+          operandSatu
+        ) {
+          setOperatorTiga((prev) => prev.slice(0, -1));
+        } else if (
+          !operandEmpat &&
+          !operatorTiga &&
+          operandTiga &&
+          operatorDua &&
+          operandDua &&
+          operatorSatu &&
+          operandSatu
+        ) {
+          setOperandTiga((prev) => prev.slice(0, -1));
+        } else if (
+          !operandEmpat &&
+          !operatorTiga &&
+          !operandTiga &&
+          operatorDua &&
+          operandDua &&
+          operatorSatu &&
+          operandSatu
+        ) {
+          setOperatorDua((prev) => prev.slice(0, -1));
+        } else if (
+          !operandEmpat &&
+          !operatorTiga &&
+          !operandTiga &&
+          !operatorDua &&
+          operandDua &&
+          operatorSatu &&
+          operandSatu
+        ) {
           setOperandDua((prev) => prev.slice(0, -1));
-        } else if (!operandDua.length && operator.length) {
-          setOperator((prev) => prev.slice(0, -1));
-        } else if (!operandDua.length && !operator.length) {
+        } else if (
+          !operandEmpat &&
+          !operatorTiga &&
+          !operandTiga &&
+          !operatorDua &&
+          !operandDua &&
+          operatorSatu &&
+          operandSatu
+        ) {
+          setOperatorSatu((prev) => prev.slice(0, -1));
+        } else if (
+          !operandEmpat &&
+          !operatorTiga &&
+          !operandTiga &&
+          !operatorDua &&
+          !operandDua &&
+          !operatorSatu &&
+          operandSatu
+        ) {
           setOperandSatu((prev) => prev.slice(0, -1));
+          setHasil("0");
+          setHasilDua("0");
         }
         break;
       // * Cek tombol clear
       case clear:
         setOperandSatu("");
         setOperandDua("");
-        setOperator("");
+        setOperandTiga("");
+        setOperandEmpat("");
+        setOperatorSatu("");
+        setOperatorDua("");
+        setOperatorTiga("");
+        setHasil("0");
+        setHasilDua("0");
         break;
     }
   };

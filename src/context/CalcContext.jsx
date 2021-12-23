@@ -6,8 +6,13 @@ const CalcContext = createContext();
 export const CalcProvider = ({ children }) => {
   const [operandSatu, setOperandSatu] = useState("");
   const [operandDua, setOperandDua] = useState("");
-  const [operator, setOperator] = useState("");
+  const [operandTiga, setOperandTiga] = useState("");
+  const [operandEmpat, setOperandEmpat] = useState("");
+  const [operatorSatu, setOperatorSatu] = useState("");
+  const [operatorDua, setOperatorDua] = useState("");
+  const [operatorTiga, setOperatorTiga] = useState("");
   const [hasil, setHasil] = useState("");
+  const [hasilDua, setHasilDua] = useState("");
   return (
     <CalcContext.Provider
       value={{
@@ -15,10 +20,20 @@ export const CalcProvider = ({ children }) => {
         setOperandSatu,
         operandDua,
         setOperandDua,
-        operator,
-        setOperator,
+        operandTiga,
+        setOperandTiga,
+        operandEmpat,
+        setOperandEmpat,
+        operatorSatu,
+        setOperatorSatu,
+        operatorDua,
+        setOperatorDua,
+        operatorTiga,
+        setOperatorTiga,
         hasil,
         setHasil,
+        hasilDua,
+        setHasilDua,
       }}
     >
       {children}
