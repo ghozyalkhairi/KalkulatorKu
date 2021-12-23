@@ -13,6 +13,7 @@ export const CalcProvider = ({ children }) => {
   const [operatorTiga, setOperatorTiga] = useState("");
   const [hasil, setHasil] = useState("");
   const [hasilDua, setHasilDua] = useState("");
+  const [hasilTiga, setHasilTiga] = useState("");
   return (
     <CalcContext.Provider
       value={{
@@ -34,6 +35,8 @@ export const CalcProvider = ({ children }) => {
         setHasil,
         hasilDua,
         setHasilDua,
+        hasilTiga,
+        setHasilTiga,
       }}
     >
       {children}

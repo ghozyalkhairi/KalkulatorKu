@@ -20,6 +20,7 @@ function Button({ value, inputOperand, inputOperator, del, clear, zero }) {
     setOperatorTiga,
     setHasil,
     setHasilDua,
+    setHasilTiga,
   } = useContext(CalcContext);
   const checkProp = () => {
     switch (true) {
@@ -149,6 +150,7 @@ function Button({ value, inputOperand, inputOperator, del, clear, zero }) {
           setOperandSatu((prev) => prev.slice(0, -1));
           setHasil("0");
           setHasilDua("0");
+          setHasilTiga("0");
         }
         break;
       // * Cek tombol clear
@@ -162,6 +164,7 @@ function Button({ value, inputOperand, inputOperator, del, clear, zero }) {
         setOperatorTiga("");
         setHasil("0");
         setHasilDua("0");
+        setHasilTiga("0");
         break;
     }
   };

@@ -15,6 +15,8 @@ function Displayer() {
     setHasil,
     hasilDua,
     setHasilDua,
+    hasilTiga,
+    setHasilTiga,
   } = useContext(CalcContext);
   useEffect(() => {
     // * Menghitung kedua operand
@@ -35,24 +37,24 @@ function Displayer() {
         break;
       case operandTiga !== "" && operatorTiga === "" && operandEmpat === "":
         if (operatorDua === "+") {
-          setHasil((prev) => prev + Number(operandTiga));
+          setHasilDua(hasil + Number(operandTiga));
         } else if (operatorDua === "-") {
-          setHasil((prev) => prev - Number(operandTiga));
+          setHasilDua(hasil - Number(operandTiga));
         } else if (operatorDua === "x") {
-          setHasil((prev) => prev * Number(operandTiga));
+          setHasilDua(hasil * Number(operandTiga));
         } else if (operatorDua === "/") {
-          setHasil((prev) => prev / Number(operandTiga));
+          setHasilDua(hasil / Number(operandTiga));
         }
         break;
       case operandTiga !== "" && operandEmpat !== "":
         if (operatorTiga === "+") {
-          setHasilDua(hasil + Number(operandEmpat));
+          setHasilTiga(hasilDua + Number(operandEmpat));
         } else if (operatorTiga === "-") {
-          setHasilDua(hasil - Number(operandEmpat));
+          setHasilTiga(hasilDua - Number(operandEmpat));
         } else if (operatorTiga === "x") {
-          setHasilDua(hasil * Number(operandEmpat));
+          setHasilTiga(hasilDua * Number(operandEmpat));
         } else if (operatorTiga === "/") {
-          setHasilDua(hasil / Number(operandEmpat));
+          setHasilTiga(hasilDua / Number(operandEmpat));
         }
         break;
     }
@@ -70,10 +72,17 @@ function Displayer() {
             Kalkulator Sederhana
           </p>
         )}
-        {operandEmpat !== "" ? (
-          <p className="text-gray-300 text-5xl self-end"> ={hasilDua}</p>
-        ) : (
+        {!operandSatu && !operandTiga && !operandEmpat && (
+          <p className="text-gray-300 text-5xl self-end"> =0</p>
+        )}
+        {operandSatu && !operandTiga && !operandEmpat && (
           <p className="text-gray-300 text-5xl self-end"> ={hasil}</p>
+        )}
+        {operandDua && operandTiga && !operandEmpat && (
+          <p className="text-gray-300 text-5xl self-end"> ={hasilDua}</p>
+        )}
+        {operandDua && operandTiga && operandEmpat && (
+          <p className="text-gray-300 text-5xl self-end"> ={hasilTiga}</p>
         )}
       </div>
     </div>
