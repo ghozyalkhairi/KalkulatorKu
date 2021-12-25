@@ -148,7 +148,6 @@ function Button({ value, inputOperand, inputOperator, del, clear, zero }) {
           operandSatu
         ) {
           setOperandSatu((prev) => prev.slice(0, -1));
-          setHasil("0");
           setHasilDua("0");
           setHasilTiga("0");
         }
