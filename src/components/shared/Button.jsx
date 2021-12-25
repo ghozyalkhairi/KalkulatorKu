@@ -148,8 +148,6 @@ function Button({ value, inputOperand, inputOperator, del, clear, zero }) {
           operandSatu
         ) {
           setOperandSatu((prev) => prev.slice(0, -1));
-          setHasilDua("0");
-          setHasilTiga("0");
         }
         break;
       // * Cek tombol clear

@@ -19,7 +19,7 @@ function Displayer() {
     setHasilTiga,
   } = useContext(CalcContext);
   useEffect(() => {
-    // * Menghitung kedua operand
+    // * Menghitung operand
     switch (true) {
       case operandSatu !== "" && operandDua === "":
         setHasil(operandSatu);
